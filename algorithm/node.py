@@ -11,6 +11,43 @@ class Node(object):
         self._children = {}
         self._neighbor = None
 
+    @property
+    def tree(self):
+        return self._tree
+
+    @property
+    def item(self):
+        return self._item
+
+    @property
+    def count(self):
+        return self._count
+
+    @property
+    def parent(self):
+        return self._parent
+
+    @parent.setter
+    def parent(self, value):
+        if isinstance(value, Node):
+            self._parent = value
+
+    @property
+    def children(self):
+        return tuple(self._children.itervalues())
+
+    @property
+    def increment(self):
+        self._count += 1
+
+    @property
+    def is_root(self):
+        return self._item is None and self._count is None
+
+    @property
+    def is_leaf(self):
+        return len(self._children) == 0
+
     def add(self, child):
         if not child.item in self._children:
             self._children[child.item] = child
@@ -27,31 +64,3 @@ class Node(object):
 
     def __contains__(self, item):
         return item in self._children
-
-    @property
-    def tree(self):
-        return self._tree
-
-    @property
-    def item(self):
-        return self._item
-
-    @property
-    def count(self):
-        return self._count
-
-    @property
-    def increment(self):
-        self._count += 1
-
-    @property
-    def is_root(self):
-        return self._item is None and self._count is None
-
-    @property
-    def is_leaf(self):
-        return len(self._children) == 0
-
-    @property
-    def children(self):
-        return tuple(self._children.itervalues())
